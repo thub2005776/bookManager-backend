@@ -7,11 +7,15 @@ router.route('/')
     .get(users.findAll)
     .post(users.create)
 
-router.route(':id')
+router.route('/:id')
+    .get(users.findById)
     .post(users.update)
     .delete(users.delete)
 
 router.route('/favorite/:id')
     .post(users.addFavorite)
-    
+
+router.route('/:email')
+    .get(users.findOne)
+
 module.exports = router;

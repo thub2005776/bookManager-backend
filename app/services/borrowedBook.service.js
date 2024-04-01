@@ -1,19 +1,17 @@
-const { BookModel } = require('../models');
+const { BorrowdBookModel } = require('../models');
 
-class BookService {
+class BorrowedBookService {
     constructor() {
-        this.book = BookModel;
+        this.book = BorrowdBookModel;
     }
 
     data(payload) {
         const values = {
-            'title': payload.title,
-            'img': payload.img,
-            'category': payload.category,
-            'author': payload.author,
-            'excerpt': payload.excerpt,
-            'borrowedTimes': payload.borrowedTimes,
-            'stored': payload.stored,
+            'uid': payload.uid,
+            'bid': payload.bid,
+            'quantity': payload.quantity,
+            'borrowDate': payload.borrowDate,
+            'returnDate': payload.returnDate,
         }
         Object.keys(values).forEach(
             (key) => values[key] === undefined && delete values[key]
@@ -29,6 +27,16 @@ class BookService {
 
     async findAll() {
         const result = await this.book.find({});
+        return result;
+    }
+
+    async findManyByUid(uid) {
+        const result = await this.book.find({uid: uid});
+        return result;
+    }
+
+    async findManyByBid(bid) {
+        const result = await this.book.find({bid: bid});
         return result;
     }
 
@@ -48,4 +56,4 @@ class BookService {
     }
 }
 
-module.exports = BookService;
+module.exports = BorrowedBookService;

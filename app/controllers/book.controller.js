@@ -11,6 +11,16 @@ exports.findAll = async (req, res, next) => {
     }
 }
 
+exports.findOne = async (req, res, next) => {
+    try {
+        const bookService = new BookService();
+        const document = await bookService.findOne(req.params.id);
+        return res.json(document);
+    } catch (err) {
+        return next(new ApiError(500, err));
+    }
+}
+
 exports.create = async (req, res, next) => {
     try {
         const bookService = new BookService();

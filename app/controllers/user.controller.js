@@ -12,6 +12,26 @@ exports.findAll = async (req, res, next) => {
     }
 }
 
+exports.findOne = async (req, res, next) => {
+    try {
+        const userService = new UserService();
+        const document = await userService.findOne(req.params.email);
+        return res.json(document);
+    } catch (err) {
+        return next(new ApiErrror(500, err));
+    }
+}
+
+exports.findById = async (req, res, next) => {
+    try {
+        const userService = new UserService();
+        const document = await userService.findById(req.params.id);
+        return res.json(document);
+    } catch (err) {
+        return next(new ApiErrror(500, err));
+    }
+}
+
 exports.create = async (req, res, next) => {
     try {
         const userService = new UserService();

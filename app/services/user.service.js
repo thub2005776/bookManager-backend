@@ -9,7 +9,7 @@ class UserService {
 
     data(payload) {
         const values = {
-            'bid': payload.bid,
+            'name': payload.name,
             'email': payload.email,
             'password': payload.password,
             'permission': payload.permission,
@@ -24,6 +24,16 @@ class UserService {
 
     async findAll() {
         const result = await this.user.find({});
+        return result;
+    }
+
+    async findOne(email) {
+        const result = await this.user.findOne({email: email});
+        return result;
+    }
+
+    async findById(id) {
+        const result = await this.user.findById(id);
         return result;
     }
 

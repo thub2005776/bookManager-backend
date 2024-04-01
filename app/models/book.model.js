@@ -2,9 +2,11 @@ const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
     title: String,
-    categorite: String,
+    img: String,
+    category: String,
     author: String,
-    quantity: Number,
+    excerpt: String,
+    borrowedTimes: Number,
     stored: Number
 });
 
