@@ -14,6 +14,7 @@ router.route('/:id')
 
 router.route('/favorite/:id')
     .post(users.addFavorite)
+    
 
 router.route('/:email')
     .get(users.findOne)

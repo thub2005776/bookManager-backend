@@ -3,7 +3,7 @@ const cors = require('cors');
 const ApiError = require('./app/api-error');
 const cookieParser = require('cookie-parser');
 
-const { UserRouter, BookRouter, LoginRouter, FileRouter, BorrowedBookRouter } = require('./app/routes');
+const { UserRouter, BookRouter, LoginRouter, FileRouter, BorrowedBookRouter, CategoryRouter } = require('./app/routes');
 
 const app = express();
 
@@ -21,15 +21,17 @@ app.use(express.static("./app/assets"));
 
 app.use(cookieParser());
 
-app.use('/users', UserRouter);
+app.use('/api/users', UserRouter);
 
-app.use('/books', BookRouter);
+app.use('/api/books', BookRouter);
 
-app.use('/borrowedBooks', BorrowedBookRouter);
+app.use('/api/categories', CategoryRouter);
 
-app.use('/log/', LoginRouter);
+app.use('/api/borrowedBooks', BorrowedBookRouter);
 
-app.use('/file', FileRouter);
+app.use('/api/log/', LoginRouter);
+
+app.use('/api/file', FileRouter);
 
 app.use((req, res, next) => {
     return next(new ApiError(404, "Resource not found"));

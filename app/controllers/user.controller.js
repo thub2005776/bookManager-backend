@@ -45,7 +45,7 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const userService = new UserService();
-        const document = await userService.update(req.params.id, res.body);
+        const document = await userService.update(req.params.id, req.body);
         return res.json(document);
     } catch (err) {
         return next(new ApiErrror(500, err));

@@ -1,4 +1,4 @@
-const BorrowedBookService = require('../services/book.service');
+const BorrowedBookService = require('../services/borrowedBook.service');
 const ApiError = require('../api-error');
 
 exports.findAll = async (req, res, next) => {
