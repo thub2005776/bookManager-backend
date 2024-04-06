@@ -45,9 +45,9 @@ exports.Adlogout = (req, res) => {
 }
 
 exports.UVerifyUSer = (req, res, next) => {
-    console.log(req.cookies.token);
+    const token = req.cookies.token;
     if (!token) {
-        return next(new ApiError(400, "You have not login"));
+        return res.json("Not found token!");
     } else {
         jwt.verify(token, "jwt-secret-key", (err, decoded) => {
             if (err) {
@@ -62,7 +62,7 @@ exports.UVerifyUSer = (req, res, next) => {
 exports.AdVerifyUSer = (req, res, next) => {
     const token = req.cookies.Adtoken;
     if (!token) {
-        return next(new ApiError(400, "You have not login"));
+        return res.json("Not found token!");
     } else {
         jwt.verify(token, "jwt-secret-key", (err, decoded) => {
             if (err) {

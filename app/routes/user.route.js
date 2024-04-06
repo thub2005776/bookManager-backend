@@ -16,7 +16,7 @@ router.route('/favorite/:id')
     .post(users.addFavorite)
     
 
-router.route('/:email')
+router.route('/email/:email')
     .get(users.findOne)
 
 module.exports = router;

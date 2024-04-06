@@ -51,11 +51,11 @@ class UserService {
         })
     }
 
-    async addFavorite(id, bid) {
-        if (bid) {
+    async addFavorite(id, data) {
+        if (data) {
             const result = await this.user.findByIdAndUpdate(
                 id,
-                { $push: { favorite: bid }}
+                { $push: { favorite: data }}
             );
             return result;
         }
