@@ -1,5 +1,5 @@
 const express = require('express');
-const books = require('../controllers/borrowedBook.controller');
+const books = require('../controllers/favorite.controller');
 
 const router = express.Router();
 
@@ -9,11 +9,11 @@ router.route('/')
 
 router.route('/:id')
     .get(books.findOne)
-    .post(books.update)
     .delete(books.delete)
 
 router.route('/uid/:uid')
     .get(books.findManyByUid)
+    .post(books.update)
 
 router.route('/:bid')
     .get(books.findManyByBid)

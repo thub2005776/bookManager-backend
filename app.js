@@ -3,7 +3,15 @@ const cors = require('cors');
 const ApiError = require('./app/api-error');
 const cookieParser = require('cookie-parser');
 
-const { UserRouter, BookRouter, LoginRouter, FileRouter, BorrowedBookRouter, CategoryRouter } = require('./app/routes');
+const { 
+    UserRouter, 
+    BookRouter, 
+    LoginRouter, 
+    FileRouter, 
+    BorrowedBookRouter, 
+    CategoryRouter, 
+    FavoritesRouter 
+} = require('./app/routes');
 
 const app = express();
 
@@ -22,6 +30,8 @@ app.use(express.static("./app/assets"));
 app.use(cookieParser());
 
 app.use('/api/users', UserRouter);
+
+app.use('/api/favorites', FavoritesRouter);
 
 app.use('/api/books', BookRouter);
 

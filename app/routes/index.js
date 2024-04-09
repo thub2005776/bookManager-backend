@@ -4,6 +4,7 @@ const LoginRouter = require('./login.route');
 const FileRouter = require('./file.route');
 const BorrowedBookRouter = require('./borrowedBook.route'); 
 const CategoryRouter = require('./category.route');
+const FavoritesRouter = require('./favorite.route');
 
 module.exports = {
     UserRouter,
@@ -12,4 +13,5 @@ module.exports = {
     FileRouter,
     BorrowedBookRouter,
     CategoryRouter,
+    FavoritesRouter,
 };
