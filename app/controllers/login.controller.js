@@ -16,10 +16,34 @@ exports.login = async (req, res, next) => {
 
                     if(user.permission === 'user') {
                         return [res.cookie('token', token), res.json(user)];
-                    } else {
-                        return [res.cookie('Adtoken', token), res.json(user)];
-                    }
-                        
+                    } 
+                } else {
+                    return res.json("Mật khẩu không đúng");
+                }
+            })
+
+        } else {
+            return res.json("Tài khoản không tồn tại");
+        }
+    } catch (err) {
+        return next(new ApiError(500, err));
+    }
+}
+
+exports.adLogin = async (req, res, next) => {
+    try {
+        const loginService = new LoginService();
+        const admin = await loginService.adLogin(req.body.email);
+        
+        if (admin) {
+            bcrypt.compare(req.body.password, admin.password, (err, result) => {
+                if (result) {
+                    const email = admin.email;
+                    const token = jwt.sign({ email }, "jwt-secret-key", { expiresIn: "1d" });
+
+                    if(admin.permission === 'admin') {
+                        return [res.cookie('Adtoken', token), res.json(admin)];
+                    }   
 
                 } else {
                     return res.json("Mật khẩu không đúng");

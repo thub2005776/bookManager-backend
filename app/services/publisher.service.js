@@ -1,13 +1,14 @@
-const { CategoryModel } = require('../models');
+const { PublisherModel } = require('../models');
 
-class CategoriesService {
+class PublisherService {
     constructor() {
-        this.category = CategoryModel;
+        this.publisher = PublisherModel;
     }
 
     data(payload) {
         const values = {
             'name': payload.name,
+            'address': payload.address,
         }
         Object.keys(values).forEach(
             (key) => values[key] === undefined && delete values[key]
@@ -17,29 +18,29 @@ class CategoriesService {
 
     async create(payload) {
         const values = this.data(payload);
-        const result = await this.category.create(values);
+        const result = await this.publisher.create(values);
         return result;
     }
 
     async findAll() {
-        const result = await this.category.find({});
+        const result = await this.publisher.find({});
         return result;
     }
 
     async findOne(id) {
-        const result = await this.category.findById(id);
+        const result = await this.publisher.findById(id);
         return result;
     }
 
     async update(id, data) {
         const values = this.data(data);
-        const result = await this.category.findByIdAndUpdate(id, values);
+        const result = await this.publisher.findByIdAndUpdate(id, values);
         return result;
     }
 
     async delete(id) {
-        const result = await this.category.findByIdAndDelete(id);
+        const result = await this.publisher.findByIdAndDelete(id);
     }
 }
 
-module.exports = CategoriesService;
+module.exports = PublisherService;

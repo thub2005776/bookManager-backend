@@ -5,6 +5,8 @@ const BookSchema = new mongoose.Schema({
     img: String,
     category: String,
     author: String,
+    pid: String,
+    publisher: String,
     excerpt: String,
     borrowedTimes: Number,
     stored: Number

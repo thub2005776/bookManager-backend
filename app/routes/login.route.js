@@ -13,7 +13,7 @@ Router.route('/u/logout')
     .get(log.Ulogout)
 
 Router.route('/ad/login')
-    .post(log.login)
+    .post(log.adLogin)
 
 Router.route('/ad/token')
     .get(log.AdVerifyUSer)

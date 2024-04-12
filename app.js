@@ -9,8 +9,9 @@ const {
     LoginRouter, 
     FileRouter, 
     BorrowedBookRouter, 
-    CategoryRouter, 
-    FavoritesRouter 
+    PublisherRouter, 
+    FavoritesRouter, 
+    AdminRouter
 } = require('./app/routes');
 
 const app = express();
@@ -31,11 +32,13 @@ app.use(cookieParser());
 
 app.use('/api/users', UserRouter);
 
+app.use('/api/admin', AdminRouter);
+
 app.use('/api/favorites', FavoritesRouter);
 
 app.use('/api/books', BookRouter);
 
-app.use('/api/categories', CategoryRouter);
+app.use('/api/publishers', PublisherRouter);
 
 app.use('/api/borrowedBooks', BorrowedBookRouter);
 

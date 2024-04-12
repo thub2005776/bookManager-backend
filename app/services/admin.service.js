@@ -1,10 +1,10 @@
-const { UserModel } = require('../models');
+const { AdminModel } = require('../models');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-class UserService {
+class AdminService {
     constructor() {
-        this.user = UserModel;
+        this.Admin = AdminModel;
     }
 
     data(payload) {
@@ -15,7 +15,6 @@ class UserService {
             'permission': payload.permission,
             'img': payload.img,
             'address': payload.address,
-            'favorite': payload.favorite,
         }
         Object.keys(values).forEach(
             (key) => values[key] === undefined && delete values[key]
@@ -24,17 +23,17 @@ class UserService {
     }
 
     async findAll() {
-        const result = await this.user.find({});
+        const result = await this.Admin.find({});
         return result;
     }
 
     async findOne(email) {
-        const result = await this.user.findOne({email: email});
+        const result = await this.Admin.findOne({email: email});
         return result;
     }
 
     async findById(id) {
-        const result = await this.user.findById(id);
+        const result = await this.Admin.findById(id);
         return result;
     }
 
@@ -47,14 +46,14 @@ class UserService {
             if (err) return "Error for hassing password";
 
             values.password = hash;
-            const result = await this.user.findOneAndUpdate({ email: values.email }, values, { upsert: true });
+            const result = await this.Admin.findOneAndUpdate({ email: values.email }, values, { upsert: true });
             return result;
         })
     }
 
     async addFavorite(id, data) {
         if (data) {
-            const result = await this.user.findByIdAndUpdate(
+            const result = await this.Admin.findByIdAndUpdate(
                 id,
                 { $push: { favorite: data }}
             );
@@ -64,19 +63,19 @@ class UserService {
 
     async update(id, data) {
         const values = this.data(data);
-        const old = await this.user.findOne({ password: values.password });
+        const old = await this.Admin.findOne({ password: values.password });
         const salt = parseInt(process.env.SALT);
         const pass = values.password;
 
         if (old) {
-            const result = await this.user.findByIdAndUpdate(id, values);
+            const result = await this.Admin.findByIdAndUpdate(id, values);
             return result;
         } else {
             bcrypt.hash(pass, salt, async (err, hash) => {
                 if (err) return "Error for hashing passord";
 
                 values.password = hash;
-                const result = await this.user.findByIdAndUpdate(id, values);
+                const result = await this.Admin.findByIdAndUpdate(id, values);
                 return result;
             })
         }
@@ -84,11 +83,11 @@ class UserService {
 
     async delete(id) {
         if (id) {
-            const result = await this.user.findByIdAndDelete(id);
+            const result = await this.Admin.findByIdAndDelete(id);
             return result;
         }
     }
 
 }
 
-module.exports = UserService;
+module.exports = AdminService;

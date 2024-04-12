@@ -11,6 +11,8 @@ class BookService {
             'img': payload.img,
             'category': payload.category,
             'author': payload.author,
+            'pid': payload.pid,
+            'publisher': payload.publisher,
             'excerpt': payload.excerpt,
             'borrowedTimes': payload.borrowedTimes,
             'stored': payload.stored,
