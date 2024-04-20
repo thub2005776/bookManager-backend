@@ -41,6 +41,16 @@ exports.update = async (req, res, next) => {
     }
 }
 
+exports.updateStored = async (req, res, next) => {
+    try {
+        const bookService = new BookService();
+        const document = await bookService.updateStored(req.params.id, req.body);
+        return res.json(document);
+    } catch (err) {
+        return next(new ApiError(500, err));
+    }
+}
+
 exports.delete = async (req, res, next) => {
     try {
         const bookService = new BookService();

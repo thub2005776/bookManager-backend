@@ -12,4 +12,7 @@ router.route('/:id')
     .post(books.update)
     .delete(books.delete)
 
+router.route('/stored/:id')
+    .post(books.updateStored)
+
 module.exports = router;

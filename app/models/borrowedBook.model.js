@@ -8,7 +8,7 @@ const BorrowdBook = new mongoose.Schema({
     quantity: Number,
     borrowDate: Date,
     returnDate: Date,
-    returned: Boolean,
+    state: String,
 });
 
 const BookModel = mongoose.model("borrowedBooks", BorrowdBook);

@@ -14,7 +14,7 @@ class BorrowedBookService {
             'quantity': payload.quantity,
             'borrowDate': payload.borrowDate,
             'returnDate': payload.returnDate,
-            'returned': payload.returned,
+            'state': payload.state,
         }
         Object.keys(values).forEach(
             (key) => values[key] === undefined && delete values[key]
@@ -51,7 +51,6 @@ class BorrowedBookService {
     async update(id, data) {
         const values = this.data(data);
         const result = await this.book.findByIdAndUpdate(id, values);
-        console.log(id);
         return result;
     }
 
