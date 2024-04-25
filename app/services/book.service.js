@@ -48,7 +48,6 @@ class BookService {
     async updateStored(id, data) {
         const book = await this.book.findById(id);
         const stored = parseInt(book?.stored + data.quantity);
-        console.log(stored);
         const result = await this.book.findByIdAndUpdate(id, {stored: stored});
         return result;
     }
